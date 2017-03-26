@@ -11,6 +11,8 @@ class Main extends React.Component {
     return (
       <div id="main">
         <Route exact={true} path="/" component={Welcome} />
+        <Route exact={true} path="/sign-up" component={SignUpForm} />
+        <Route exact={true} path="/sign-in" component={SignInForm} />
         <Route exact={true} path="/cookbooks" component={CookbookMenu} />
       </div>
     )

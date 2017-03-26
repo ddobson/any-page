@@ -1,6 +1,11 @@
+import React from 'react';
+
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
+class SignInForm extends React.Component {
+  render() {
+    return (
       <div className="form-wrap">
         <h2>Sign In</h2>
         <form action="sign-in">
@@ -19,3 +24,9 @@ import RaisedButton from 'material-ui/RaisedButton';
           />
         <RaisedButton type="submit" label="Submit" primary={true} />
       </form>
+    </div>
+    )
+  }
+}
+
+export default SignInForm;
