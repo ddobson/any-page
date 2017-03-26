@@ -5,6 +5,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 // Components
 import Navigation from './Navigation';
+import Main from './Main';
 
 class App extends React.Component {
   constructor(props) {
@@ -25,6 +26,7 @@ class App extends React.Component {
       <BrowserRouter>
         <div>
           <Navigation loggedIn={loggedIn} />
+          <Main />
         </div>
       </BrowserRouter>
     )
