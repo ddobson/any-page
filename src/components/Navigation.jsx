@@ -36,7 +36,9 @@ class Navigation extends React.Component {
           anchorOrigin={{horizontal: 'right', vertical: 'top'}}
           targetOrigin={{horizontal: 'right', vertical: 'top'}}
         >
-          <MenuItem primaryText="Change Password" />
+          <Link to="/change-pw" style={ { textDecoration: 'none' } } >
+            <MenuItem primaryText="Change Password" />
+          </Link>
           <MenuItem primaryText="Sign out" />
         </IconMenu>
       </AppBar>

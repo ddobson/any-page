@@ -3,7 +3,7 @@ import React from 'react';
 class Welcome extends React.Component {
   render() {
     return (
-      <h1>NOT LOGGED IN</h1>
+      <h1>WELCOME COMPONENT</h1>
     )
   }
 }

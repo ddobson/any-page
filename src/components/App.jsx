@@ -13,7 +13,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      loggedIn: false,
+      loggedIn: localStorage.getItem('token') ? true : false,
     }
 
     this.handleAuth = this.handleAuth.bind(this);
@@ -47,6 +47,13 @@ class App extends React.Component {
       case 'sign-in':
         return fetch(`${baseUrl}/sign-in`, {
           method: 'POST',
+          headers: headers,
+          body: data
+        });
+      case 'change-pw':
+        headers.append('Authorization', `Token token=${localStorage.getItem('token')}`)
+        return fetch(`${baseUrl}/change-password/${localStorage.getItem('id')}`, {
+          method: 'PATCH',
           headers: headers,
           body: data
         });
