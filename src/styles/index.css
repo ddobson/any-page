@@ -4,9 +4,25 @@ body {
   font-family: sans-serif;
 }
 
+#main {
+  padding: 0 40px;
+}
+
 .form-wrap {
   max-width: 768px;
   padding: 10px;
-  margin: 10px auto;
+  margin: 25px auto 15px;
   position: relative;
+}
+
+.swatch-wrap {
+  padding: 10px;
+}
+
+.swatch-wrap h4 {
+  text-align: center;
+}
+
+.swatch-wrap i {
+  padding: 20px;
 }
