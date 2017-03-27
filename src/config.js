@@ -1,6 +1,6 @@
 export default {
   production: {
-    api: "http://foo.app"
+    api: "https://cook-book-nook-api.herokuapp.com/"
   },
   development: {
     api: "http://localhost:4741"
