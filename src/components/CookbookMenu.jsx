@@ -1,9 +1,10 @@
 import React from 'react';
+import NewCookbookForm from './forms/NewCookbookForm';
 
 class CookbookMenu extends React.Component {
   render() {
     return (
-      <h1>CookbookMenu</h1>
+      <NewCookbookForm />
     )
   }
 }
