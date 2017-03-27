@@ -1,24 +1,20 @@
 import React from 'react';
-import CookBookService from '../../services/cookbook-api';
+
+// Components
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
-const cbService = new CookBookService();
-
-class CookbookMenu extends React.Component {
+class NewCookbookForm extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      cookbooks: []
-    }
 
     this.handleNewSubmit = this.handleNewSubmit.bind(this);
   }
 
   handleNewSubmit(event) {
     event.preventDefault();
+    const form = this.refs.form;
     const formData = {
       cookbook: {
         title: this.refs.newCbTitle.getValue(),
@@ -27,15 +23,7 @@ class CookbookMenu extends React.Component {
       }
     }
 
-    cbService.createCookbook(formData)
-      .then((response) => response.json())
-      .then((json) => {
-        const cookbooks = this.state.cookbooks.slice()
-          cookbooks.push(json);
-
-        this.setState({ cookbooks })
-        this.refs.form.reset();
-      });
+    this.props.handleNewCb(formData, form);
   }
 
   render() {
@@ -83,4 +71,4 @@ class CookbookMenu extends React.Component {
   }
 }
 
-export default CookbookMenu;
+export default NewCookbookForm;
