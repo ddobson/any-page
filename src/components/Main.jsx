@@ -3,6 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 
 import Welcome from './Welcome';
 import CookbookMenu from './CookbookMenu';
+import CookbookDetail from './CookbookDetail';
 import SignUpForm from './forms/SignUpForm';
 import SignInForm from './forms/SignInForm';
 import ChangePwForm from './forms/ChangePwForm';
@@ -13,6 +14,7 @@ class Main extends React.Component {
       <div id="main">
         <Route exact={true} path="/" component={Welcome} />
         <Route exact={true} path="/cookbooks" component={CookbookMenu} />
+        <Route exact={true} path="/cookbooks/:id" component={CookbookDetail} />
         <Route exact={true} path="/change-pw" render={() => (
           <ChangePwForm handleAuth={ this.props.handleAuth } />
         )}/>

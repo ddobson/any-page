@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -8,7 +9,9 @@ class CookbookSwatch extends React.Component {
     const content = (
       <div className="swatch-wrap">
         <i className="fa fa-book fa-5x" aria-hidden="true"></i>
-        <RaisedButton label={ this.props.cookbook.title } secondary={ true } />
+        <Link to={`/cookbooks/${this.props.cookbook.id}`}>
+          <RaisedButton label={ this.props.cookbook.title } secondary={ true } />
+        </Link>
       </div>
     );
 
