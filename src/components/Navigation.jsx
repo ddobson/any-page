@@ -8,6 +8,20 @@ import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 
 class Navigation extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleSignOut = this.handleSignOut.bind(this);
+  }
+
+  handleSignOut() {
+    this.props.handleAuth('sign-out')
+      .then(() => {
+        localStorage.clear();
+        this.props.updateAuthStatus(false);
+      })
+      .catch(console.error);
+  }
+
   render() {
     const loggedIn = this.props.loggedIn;
     const iconStyle = { margin: '9px 0 0' }
@@ -39,7 +53,7 @@ class Navigation extends React.Component {
           <Link to="/change-pw" style={ { textDecoration: 'none' } } >
             <MenuItem primaryText="Change Password" />
           </Link>
-          <MenuItem primaryText="Sign out" />
+          <MenuItem primaryText="Sign out" onTouchTap={ this.handleSignOut } />
         </IconMenu>
       </AppBar>
     )
