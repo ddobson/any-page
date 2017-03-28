@@ -10,6 +10,7 @@ body {
 
 .title-link {
   color: #ffffff;
+  text-decoration: none;
 }
 
 .title-link:hover {
@@ -32,7 +33,7 @@ body {
 }
 
 .form-wrap {
-  max-width: 768px;
+  max-width: 960px;
   padding: 10px;
   margin: 25px auto 15px;
   position: relative;

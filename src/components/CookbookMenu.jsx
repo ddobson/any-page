@@ -64,7 +64,7 @@ class CookbookMenu extends React.Component {
         <div className='row'>
           { content }
         </div>
-        <div className='row'>
+        <div className='columns'>
           { swatches }
         </div>
       </div>

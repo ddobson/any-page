@@ -16,7 +16,7 @@ class CookbookSwatch extends React.Component {
     );
 
     return (
-      <Paper className='col-xs-12 col-md-3 col-lg-2' style={ { maxWidth: '250px', margin: '15px' } } children={ content } />
+      <Paper className='column col-12' style={ { marginBottom: '15px' } } children={ content } />
     )
   }
 }
