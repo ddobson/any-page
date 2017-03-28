@@ -28,25 +28,25 @@ class SignInForm extends React.Component {
 
   render() {
     return (
-      <div className="form-wrap">
+      <div className='form-wrap'>
         <h2>Sign In</h2>
-        <form ref="form" action="sign-in" onSubmit={ this.submitSignIn.bind(this) }>
+        <form ref='form' action='sign-in' onSubmit={ this.submitSignIn.bind(this) }>
           <TextField
-            hintText="Email"
-            floatingLabelText="Email"
+            hintText='Email'
+            floatingLabelText='Email'
             fullWidth={true}
-            ref="email"
-            type="text"
+            ref='email'
+            type='text'
           />
           <br />
           <TextField
-            hintText="Password"
-            floatingLabelText="Password"
+            hintText='Password'
+            floatingLabelText='Password'
             fullWidth={true}
-            ref="password"
-            type="password"
+            ref='password'
+            type='password'
           />
-        <RaisedButton type="submit" label="Submit" primary={true} />
+        <RaisedButton type='submit' label='Submit' primary={true} />
       </form>
     </div>
     )

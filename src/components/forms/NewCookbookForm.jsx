@@ -29,41 +29,41 @@ class NewCookbookForm extends React.Component {
   render() {
     return (
       <Paper zDepth={2}>
-        <div className="form-wrap">
+        <div className='form-wrap'>
           <h2>Create a Cookbook</h2>
-          <form ref="form" action="new-recipe" onSubmit={ this.handleNewSubmit }>
+          <form ref='form' action='new-recipe' onSubmit={ this.handleNewSubmit }>
             <TextField
-              hintText="Book Title"
-              floatingLabelText="Book Title"
+              hintText='Book Title'
+              floatingLabelText='Book Title'
               fullWidth={true}
-              ref="newCbTitle"
+              ref='newCbTitle'
               required={true}
-              type="text"
-              maxLength="250"
+              type='text'
+              maxLength='250'
             />
             <TextField
-              hintText="Start Page"
-              floatingLabelText="Start Page"
-              ref="newCbStart"
+              hintText='Start Page'
+              floatingLabelText='Start Page'
+              ref='newCbStart'
               required={true}
-              type="number"
-              min="1"
-              max="1000"
-              step="1"
+              type='number'
+              min='1'
+              max='1000'
+              step='1'
             />
             <br />
             <TextField
-              hintText="Start Page"
-              floatingLabelText="Start Page"
-              ref="newCbEnd"
+              hintText='Start Page'
+              floatingLabelText='Start Page'
+              ref='newCbEnd'
               required={true}
-              type="number"
-              min="1"
-              max="1000"
-              step="1"
+              type='number'
+              min='1'
+              max='1000'
+              step='1'
             />
             <br />
-          <RaisedButton type="submit" label="Create" primary={true} />
+          <RaisedButton type='submit' label='Create' primary={true} />
           </form>
         </div>
       </Paper>

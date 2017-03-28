@@ -33,27 +33,25 @@ class Navigation extends React.Component {
 
     if (!loggedIn) {
       return (
-        <AppBar title="Any Page" showMenuIconButton={false}>
           <Link to={'/sign-up'}>
-            <FlatButton style={buttonStyle} label="Sign Up" />
+            <FlatButton style={buttonStyle} label='Sign Up' />
           </Link>
           <Link to={'/sign-in'}>
-            <FlatButton style={buttonStyle} label="Sign In" />
+            <FlatButton style={buttonStyle} label='Sign In' />
           </Link>
         </AppBar>
       )
     }
     return (
-      <AppBar title="Any Page" showMenuIconButton={false}>
         <IconMenu
-          iconButtonElement={<IconButton style={iconStyle} iconClassName="fa fa-user-o" />}
+          iconButtonElement={<IconButton style={iconStyle} iconClassName='fa fa-user-o' />}
           anchorOrigin={{horizontal: 'right', vertical: 'top'}}
           targetOrigin={{horizontal: 'right', vertical: 'top'}}
         >
-          <Link to="/change-pw" style={ { textDecoration: 'none' } } >
-            <MenuItem primaryText="Change Password" />
+          <Link to='/change-pw' style={ { textDecoration: 'none' } } >
+            <MenuItem primaryText='Change Password' />
           </Link>
-          <MenuItem primaryText="Sign out" onTouchTap={ this.handleSignOut } />
+          <MenuItem primaryText='Sign out' onTouchTap={ this.handleSignOut } />
         </IconMenu>
       </AppBar>
     )

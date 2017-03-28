@@ -36,25 +36,25 @@ class ChangePwForm extends React.Component {
 
   render() {
     return (
-      <div className="form-wrap">
+      <div className='form-wrap'>
         <h2>Change Password</h2>
-        <form ref="form" action="sign-up" onSubmit={ this.submitSignUp.bind(this) }>
+        <form ref='form' action='sign-up' onSubmit={ this.submitSignUp.bind(this) }>
           <TextField
-            ref="old"
-            hintText="Old Password"
-            floatingLabelText="Old Password"
+            ref='old'
+            hintText='Old Password'
+            floatingLabelText='Old Password'
             fullWidth={true}
-            type="password"
+            type='password'
           />
           <br />
           <TextField
-            ref="new"
-            hintText="New Password"
-            floatingLabelText="New Password"
+            ref='new'
+            hintText='New Password'
+            floatingLabelText='New Password'
             fullWidth={true}
-            type="password"
+            type='password'
           />
-        <RaisedButton type="submit" label="Submit" primary={true} />
+        <RaisedButton type='submit' label='Submit' primary={true} />
         </form>
         <Snackbar
           open={this.state.open}

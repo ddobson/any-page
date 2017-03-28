@@ -33,33 +33,33 @@ class SignUpForm extends React.Component {
 
   render() {
     return (
-      <div className="form-wrap">
+      <div className='form-wrap'>
         <h2>Sign Up</h2>
-        <form ref="form" action="sign-up" onSubmit={ this.submitSignUp.bind(this) }>
+        <form ref='form' action='sign-up' onSubmit={ this.submitSignUp.bind(this) }>
           <TextField
-            ref="email"
-            hintText="Email"
-            floatingLabelText="Email"
+            ref='email'
+            hintText='Email'
+            floatingLabelText='Email'
             fullWidth={true}
-            type="text"
+            type='text'
           />
           <br />
           <TextField
-            ref="password"
-            hintText="Password"
-            floatingLabelText="Password"
+            ref='password'
+            hintText='Password'
+            floatingLabelText='Password'
             fullWidth={true}
-            type="password"
+            type='password'
           />
           <br />
           <TextField
-            ref="passwordConf"
-            hintText="Password Confirmation"
-            floatingLabelText="Password Confirmation"
+            ref='passwordConf'
+            hintText='Password Confirmation'
+            floatingLabelText='Password Confirmation'
             fullWidth={true}
-            type="password"
+            type='password'
           />
-        <RaisedButton type="submit" label="Submit" primary={true} />
+        <RaisedButton type='submit' label='Submit' primary={true} />
         </form>
       </div>
     )
