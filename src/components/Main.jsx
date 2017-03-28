@@ -34,7 +34,6 @@ class Main extends React.Component {
             <SignInForm handleAuth={ this.props.handleAuth } updateAuthStatus={ this.props.updateAuthStatus }/>
           )
         )}/>
-      {/*}<Route exact={true} path='/sign-in' component={SignInForm} handleAuth={this.props.handleAuth} />*/}
       </div>
     )
   }
