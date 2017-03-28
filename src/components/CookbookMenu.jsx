@@ -17,6 +17,7 @@ class CookbookMenu extends React.Component {
     }
 
     this.handleNewCb = this.handleNewCb.bind(this);
+    this.handleDestroyCb = this.handleDestroyCb.bind(this);
   }
 
   componentDidMount() {
@@ -26,10 +27,7 @@ class CookbookMenu extends React.Component {
         const cookbooks = this.state.cookbooks.slice()
           json.cookbooks.forEach((cookbook) => cookbooks.push(cookbook));
 
-        // Remove for production
-        setTimeout(() => {
-          this.setState({ cookbooks, isLoading: false })
-        }, 1000)
+        this.setState({ cookbooks, isLoading: false });
       });
   }
 
@@ -46,6 +44,20 @@ class CookbookMenu extends React.Component {
       .catch(console.error);
   }
 
+  handleDestroyCb(id) {
+    cbService.destroyCookbook(id)
+      .then(() => {
+        this.setState( {isLoading: true} )
+        cbService.getCookbooks()
+          .then((response) => response.json())
+          .then((json) => {
+            this.setState({ cookbooks: json.cookbooks, isLoading: false });
+          })
+          .catch(console.error);
+      })
+      .catch(console.error);
+  }
+
   render() {
     const isLoading = this.state.isLoading;
     const cookbooks = this.state.cookbooks;
@@ -56,7 +68,7 @@ class CookbookMenu extends React.Component {
       content = <CircularProgress size={100} thickness={7} style={{marginLeft: '50%', marginTop: '60px', left: '-50px'}} />;
     } else {
       content = <NewCookbookForm handleNewCb={ this.handleNewCb } />;
-      swatches = cookbooks.map((cookbook, i) => <CookbookSwatch key={i} cookbook={cookbook} />);
+      swatches = cookbooks.map((cookbook, i) => <CookbookSwatch key={i} cookbook={cookbook} handleDestroyCb={this.handleDestroyCb} />);
     }
 
     return (

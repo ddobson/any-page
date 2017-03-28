@@ -5,6 +5,11 @@ import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 
 class CookbookSwatch extends React.Component {
+  destroyClick(event) {
+    event.preventDefault();
+    this.props.handleDestroyCb(this.props.cookbook.id);
+  }
+
   render() {
     const content = (
       <div className='swatch-wrap'>
@@ -12,6 +17,7 @@ class CookbookSwatch extends React.Component {
         <Link to={`/cookbooks/${this.props.cookbook.id}`}>
           <RaisedButton label={ this.props.cookbook.title } secondary={ true } />
         </Link>
+        <RaisedButton label='Delete' onTouchTap={ this.destroyClick.bind(this) } secondary={ true } />
       </div>
     );
 

@@ -46,6 +46,14 @@ class CookBookService {
     });
   }
 
+  destroyCookbook(id) {
+    const headers = this.getDeleteHeaders();
+    return fetch(`${this.baseUrl}/cookbooks/${id}`, {
+      method: 'DELETE',
+      headers: headers,
+    });
+  }
+
   createRecipe(id, data) {
     const headers = this.postPatchHeaders();
     data = JSON.stringify(data);
