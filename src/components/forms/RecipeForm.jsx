@@ -1,13 +1,10 @@
 import React from 'react';
-import CookBookService from '../../services/cookbook-api';
 
 // Components
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import CircularProgress from 'material-ui/CircularProgress';
-
-const cbService = new CookBookService();
 
 class RecipeForm extends React.Component {
   constructor(props) {
@@ -20,8 +17,14 @@ class RecipeForm extends React.Component {
   isValidForm(formData) {
     const startPage = parseInt(formData.recipe.start_page, 10);
     const endPage = parseInt(formData.recipe.end_page, 10);
+    const availPages = this.props.availPages;
 
-    if (startPage > endPage) {
+    if (
+      endPage < startPage ||
+      startPage < availPages[0] ||
+      endPage > availPages[availPages.length - 1]
+    ) {
+      console.error('validation failed');
       return false;
     }
 
@@ -30,6 +33,7 @@ class RecipeForm extends React.Component {
 
   handleNewSubmit(event) {
     event.preventDefault();
+    const form = this.refs.form;
     const formData = {
       recipe: {
         name: this.refs.newRecipeName.getValue(),
@@ -39,7 +43,7 @@ class RecipeForm extends React.Component {
     }
 
     if (this.isValidForm(formData)) {
-      cbService.createRecipe(this.props.cookbookId, formData);
+      this.props.handleNewRecipe(formData, form);
     } else {
       return;
     }

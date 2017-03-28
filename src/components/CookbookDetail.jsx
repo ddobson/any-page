@@ -7,11 +7,15 @@ const cbService = new CookBookService();
 class CookbookDetail extends React.Component {
   constructor(props){
     super(props);
+
     this.state = {
       isLoading: true,
       cookbook: {}
     }
+
     this.cookbookId = this.props.match.params.id;
+
+    this.handleNewRecipe = this.handleNewRecipe.bind(this)
   }
 
   componentDidMount() {
@@ -20,6 +24,22 @@ class CookbookDetail extends React.Component {
       .then((json) => {
         this.setState({ cookbook: json.cookbook, isLoading: false })
       });
+  }
+
+  handleNewRecipe(formData, form) {
+    cbService.createRecipe(this.cookbookId, formData)
+      .then(() => {
+        this.setState( {isLoading: true} )
+        cbService.getCookbook(this.cookbookId)
+          .then((response) => response.json())
+          .then((json) => {
+            this.setState({ cookbook: json.cookbook, isLoading: false })
+          })
+          .catch(console.error);
+
+        form.reset();
+      })
+      .catch(console.error);
   }
 
   render() {
@@ -33,7 +53,11 @@ class CookbookDetail extends React.Component {
     return (
       <div>
         <h1>{cookbook.title || ''}</h1>
-        <RecipeForm cookbookId={ cookbook.id } availPages={ cookbook.avail_pages } />
+        <RecipeForm
+          handleNewRecipe={ this.handleNewRecipe }
+          cookbookId={ cookbook.id }
+          availPages={ cookbook.avail_pages }
+        />
         {content}
       </div>
     )
