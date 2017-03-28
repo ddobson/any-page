@@ -4,7 +4,6 @@ import React from 'react';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import CircularProgress from 'material-ui/CircularProgress';
 
 class RecipeForm extends React.Component {
   constructor(props) {
@@ -102,7 +101,7 @@ class RecipeForm extends React.Component {
             </form>
           </div>
           <div className="column col-xs-12 col-md-6">
-            {<h2>Your Page: {randomPage}</h2> || <CircularProgress />}
+            {<h2>Your Page: { randomPage || 'N/A' }</h2>}
           </div>
         </div>
       </Paper>
