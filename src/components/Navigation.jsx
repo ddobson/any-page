@@ -33,6 +33,7 @@ class Navigation extends React.Component {
 
     if (!loggedIn) {
       return (
+        <AppBar title={<Link className='brand' to='/'>CookbookNook</Link>} showMenuIconButton={false}>
           <Link to={'/sign-up'}>
             <FlatButton style={buttonStyle} label='Sign Up' />
           </Link>
@@ -43,6 +44,7 @@ class Navigation extends React.Component {
       )
     }
     return (
+      <AppBar title={<Link to='/'>CookbookNook</Link>} showMenuIconButton={false}>
         <IconMenu
           iconButtonElement={<IconButton style={iconStyle} iconClassName='fa fa-user-o' />}
           anchorOrigin={{horizontal: 'right', vertical: 'top'}}
