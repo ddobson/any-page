@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// Components
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import IconMenu from 'material-ui/IconMenu';
@@ -24,7 +25,8 @@ class Navigation extends React.Component {
 
   render() {
     const loggedIn = this.props.loggedIn;
-    const iconStyle = { margin: '9px 0 0' }
+    const titleLink = <Link className='title-link' to='/'>CookbookNook</Link>
+    const icon = <IconButton style={{ margin: '9px 0 0', color: '#fff' }} iconClassName='fa fa-user-o' />
     const buttonStyle = {
       backgroundColor: 'transparent',
       color: '#fff',
@@ -33,7 +35,7 @@ class Navigation extends React.Component {
 
     if (!loggedIn) {
       return (
-        <AppBar title={<Link className='brand' to='/'>CookbookNook</Link>} showMenuIconButton={false}>
+        <AppBar title={titleLink} showMenuIconButton={false}>
           <Link to={'/sign-up'}>
             <FlatButton style={buttonStyle} label='Sign Up' />
           </Link>
@@ -44,9 +46,9 @@ class Navigation extends React.Component {
       )
     }
     return (
-      <AppBar title={<Link to='/'>CookbookNook</Link>} showMenuIconButton={false}>
+      <AppBar title={titleLink} showMenuIconButton={false}>
         <IconMenu
-          iconButtonElement={<IconButton style={iconStyle} iconClassName='fa fa-user-o' />}
+          iconButtonElement={icon}
           anchorOrigin={{horizontal: 'right', vertical: 'top'}}
           targetOrigin={{horizontal: 'right', vertical: 'top'}}
         >

@@ -8,6 +8,29 @@ body {
   padding: 0 40px;
 }
 
+.title-link {
+  color: #ffffff;
+}
+
+.title-link:hover {
+  color: #efefef;
+  text-decoration: none;
+}
+
+.title-link:active {
+  color: #efefef;
+  text-decoration: none;
+}
+
+.title-link:focus {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.fa.fa-user-o {
+  color: #ffffff !important;
+}
+
 .form-wrap {
   max-width: 768px;
   padding: 10px;
