@@ -1,7 +1,9 @@
 import React from 'react';
+
+// Components
 import CookBookService from '../services/cookbook-api';
 import RecipeForm from './forms/RecipeForm';
-
+import RecipeSwatch from './RecipeSwatch';
 const cbService = new CookBookService();
 
 class CookbookDetail extends React.Component {
@@ -10,7 +12,9 @@ class CookbookDetail extends React.Component {
 
     this.state = {
       isLoading: true,
-      cookbook: {}
+      cookbook: {
+        recipes: []
+      }
     }
 
     this.cookbookId = this.props.match.params.id;
@@ -44,10 +48,12 @@ class CookbookDetail extends React.Component {
 
   render() {
     const cookbook = this.state.cookbook;
-    let content = <h1>{this.cookbookId}</h1>;
+    let content = null;
+    let swatches = null;
 
     if (!this.isLoading) {
-      content = <h1>{cookbook.title}</h1>
+      content = <h2>Your Recipes</h2>;
+      swatches = cookbook.recipes.map((recipe, i) => <RecipeSwatch key={i} recipe={recipe} />);
     }
 
     return (
@@ -58,7 +64,8 @@ class CookbookDetail extends React.Component {
           cookbookId={ cookbook.id }
           availPages={ cookbook.avail_pages }
         />
-        {content}
+        { content }
+        { swatches }
       </div>
     )
   }

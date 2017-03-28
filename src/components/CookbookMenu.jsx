@@ -61,10 +61,10 @@ class CookbookMenu extends React.Component {
 
     return (
       <div className='containter'>
-        <div className='row'>
+        <div>
           { content }
         </div>
-        <div className='columns'>
+        <div>
           { swatches }
         </div>
       </div>

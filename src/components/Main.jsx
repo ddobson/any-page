@@ -7,6 +7,7 @@ import CookbookDetail from './CookbookDetail';
 import SignUpForm from './forms/SignUpForm';
 import SignInForm from './forms/SignInForm';
 import ChangePwForm from './forms/ChangePwForm';
+import RecipeDetail from './RecipeDetail';
 
 class Main extends React.Component {
   render() {
@@ -15,6 +16,7 @@ class Main extends React.Component {
         <Route exact={true} path='/' component={Welcome} />
         <Route exact={true} path='/cookbooks' component={CookbookMenu} />
         <Route exact={true} path='/cookbooks/:id' component={CookbookDetail} />
+        <Route exact={true} path='/recipes/:id' component={RecipeDetail} />
         <Route exact={true} path='/change-pw' render={() => (
           <ChangePwForm handleAuth={ this.props.handleAuth } />
         )}/>
