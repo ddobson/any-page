@@ -28,10 +28,28 @@ class CookBookService {
     });
   }
 
+  getCookbook(id) {
+    const headers = this.getDeleteHeaders();
+    return fetch(`${this.baseUrl}/cookbooks/${id}`, {
+      method: 'GET',
+      headers: headers,
+    });
+  }
+
   createCookbook(data) {
     const headers = this.postPatchHeaders();
     data = JSON.stringify(data);
     return fetch(`${this.baseUrl}/cookbooks`, {
+      method: 'POST',
+      headers: headers,
+      body: data,
+    });
+  }
+
+  createRecipe(id, data) {
+    const headers = this.postPatchHeaders();
+    data = JSON.stringify(data);
+    return fetch(`${this.baseUrl}/cookbooks/${id}/recipes`, {
       method: 'POST',
       headers: headers,
       body: data,
