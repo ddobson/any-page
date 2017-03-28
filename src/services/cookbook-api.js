@@ -55,6 +55,14 @@ class CookBookService {
       body: data,
     });
   }
+
+  getRecipe(id) {
+    const headers = this.getDeleteHeaders();
+    return fetch(`${this.baseUrl}/recipes/${id}`, {
+      method: 'GET',
+      headers: headers,
+    });
+  }
 }
 
 export default CookBookService
