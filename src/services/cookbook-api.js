@@ -63,6 +63,14 @@ class CookBookService {
       headers: headers,
     });
   }
+
+  destroyRecipe(id) {
+    const headers = this.getDeleteHeaders();
+    return fetch(`${this.baseUrl}/recipes/${id}`, {
+      method: 'DELETE',
+      headers: headers,
+    });
+  }
 }
 
 export default CookBookService

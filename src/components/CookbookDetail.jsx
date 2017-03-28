@@ -19,7 +19,8 @@ class CookbookDetail extends React.Component {
 
     this.cookbookId = this.props.match.params.id;
 
-    this.handleNewRecipe = this.handleNewRecipe.bind(this)
+    this.handleNewRecipe = this.handleNewRecipe.bind(this);
+    this.handleDestroyRecipe = this.handleDestroyRecipe.bind(this);
   }
 
   componentDidMount() {
@@ -46,6 +47,20 @@ class CookbookDetail extends React.Component {
       .catch(console.error);
   }
 
+  handleDestroyRecipe(id) {
+    cbService.destroyRecipe(id)
+      .then(() => {
+        this.setState( {isLoading: true} )
+        cbService.getCookbook(this.cookbookId)
+          .then((response) => response.json())
+          .then((json) => {
+            this.setState({ cookbook: json.cookbook, isLoading: false })
+          })
+          .catch(console.error);
+      })
+      .catch(console.error);
+  }
+
   render() {
     const cookbook = this.state.cookbook;
     let content = null;
@@ -53,7 +68,7 @@ class CookbookDetail extends React.Component {
 
     if (!this.isLoading) {
       content = <h2>Your Recipes</h2>;
-      swatches = cookbook.recipes.map((recipe, i) => <RecipeSwatch key={i} recipe={recipe} />);
+      swatches = cookbook.recipes.map((recipe, i) => <RecipeSwatch handleDestroyRecipe={this.handleDestroyRecipe} key={i} recipe={recipe} />);
     }
 
     return (
