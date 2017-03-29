@@ -27,6 +27,8 @@ class CookbookDetail extends React.Component {
   }
 
   componentDidMount() {
+    this.setState({ open: false });
+
     cbService.getCookbook(this.cookbookId)
       .then((response) => response.json())
       .then((json) => {

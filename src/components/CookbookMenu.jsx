@@ -24,6 +24,8 @@ class CookbookMenu extends React.Component {
   }
 
   componentDidMount() {
+    this.setState({ open: false });
+
     cbService.getCookbooks()
       .then((response) => response.json())
       .then((json) => {
