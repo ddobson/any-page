@@ -5,6 +5,8 @@ import CookBookService from '../services/cookbook-api';
 import NewCookbookForm from './forms/NewCookbookForm';
 import CircularProgress from 'material-ui/CircularProgress';
 import CookbookSwatch from './CookbookSwatch'
+import Snackbar from 'material-ui/Snackbar';
+
 
 const cbService = new CookBookService();
 
@@ -14,6 +16,7 @@ class CookbookMenu extends React.Component {
     this.state = {
       cookbooks: [],
       isLoading: true,
+      open: false
     }
 
     this.handleNewCb = this.handleNewCb.bind(this);
@@ -28,7 +31,8 @@ class CookbookMenu extends React.Component {
           json.cookbooks.forEach((cookbook) => cookbooks.push(cookbook));
 
         this.setState({ cookbooks, isLoading: false });
-      });
+      })
+      .catch(() => this.setState({ open: true }));
   }
 
   handleNewCb(formData, form) {
@@ -41,7 +45,7 @@ class CookbookMenu extends React.Component {
         this.setState({ cookbooks })
         form.reset();
       })
-      .catch(console.error);
+      .catch(() => this.setState({ open: true }));
   }
 
   handleDestroyCb(id) {
@@ -53,9 +57,9 @@ class CookbookMenu extends React.Component {
           .then((json) => {
             this.setState({ cookbooks: json.cookbooks, isLoading: false });
           })
-          .catch(console.error);
+          .catch(() => this.setState({ open: true }));
       })
-      .catch(console.error);
+      .catch(() => this.setState({ open: true }));
   }
 
   render() {
@@ -79,6 +83,12 @@ class CookbookMenu extends React.Component {
         <div>
           { swatches }
         </div>
+        <Snackbar
+          open={this.state.open}
+          message={'Sorry something went wrong. Please try again.'}
+          autoHideDuration={4000}
+          onRequestClose={this.handleRequestClose}
+        />
       </div>
     )
   }
