@@ -1,38 +1,24 @@
 import React from 'react';
+import ValidationService from '../../services/ValidationService';
 
 // Components
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
+const validations = new ValidationService();
+
 class RecipeForm extends React.Component {
   constructor(props) {
     super(props);
 
     this.handleNewSubmit = this.handleNewSubmit.bind(this);
-    this.isValidForm = this.isValidForm.bind(this);
-  }
-
-  isValidForm(formData) {
-    const startPage = parseInt(formData.recipe.start_page, 10);
-    const endPage = parseInt(formData.recipe.end_page, 10);
-    const availPages = this.props.availPages;
-
-    if (
-      endPage < startPage ||
-      startPage < availPages[0] ||
-      endPage > availPages[availPages.length - 1]
-    ) {
-      console.error('validation failed');
-      return false;
-    }
-
-    return true;
   }
 
   handleNewSubmit(event) {
     event.preventDefault();
     const form = this.refs.form;
+    const availPages = this.props.availPages;
     const formData = {
       recipe: {
         name: this.refs.newRecipeName.getValue(),
@@ -40,12 +26,9 @@ class RecipeForm extends React.Component {
         end_page: this.refs.newRecipeEnd.getValue()
       }
     }
+    const valid = validations.validateRecipe(formData, availPages);
 
-    if (this.isValidForm(formData)) {
-      this.props.handleNewRecipe(formData, form);
-    } else {
-      return;
-    }
+    this.props.handleNewRecipe(formData, form, valid);
   }
 
   getRandomPage() {

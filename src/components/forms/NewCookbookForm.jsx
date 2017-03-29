@@ -26,9 +26,9 @@ class NewCookbookForm extends React.Component {
       }
     }
 
-    const validity = validations.validateCookbook(formData);
+    const valid = validations.validateCookbook(formData);
 
-    this.props.handleNewCb(formData, form, validity);
+    this.props.handleNewCb(formData, form, valid);
   }
 
   render() {
