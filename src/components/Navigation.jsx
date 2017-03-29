@@ -55,7 +55,9 @@ class Navigation extends React.Component {
           <Link to='/change-pw' style={ { textDecoration: 'none' } } >
             <MenuItem primaryText='Change Password' />
           </Link>
-          <MenuItem primaryText='Sign out' onTouchTap={ this.handleSignOut } />
+          <Link to='sign-out' style={ { textDecoration: 'none' } }>
+            <MenuItem primaryText='Sign out' onTouchTap={ this.handleSignOut } />
+          </Link>
         </IconMenu>
       </AppBar>
     )

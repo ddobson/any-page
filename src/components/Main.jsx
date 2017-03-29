@@ -14,12 +14,10 @@ class Main extends React.Component {
     return (
       <div id='main'>
         <Route exact={true} path='/' component={Welcome} />
+        <Route exact={true} path='/welcome' component={Welcome} />
         <Route exact={true} path='/cookbooks' component={CookbookMenu} />
         <Route exact={true} path='/cookbooks/:id' component={CookbookDetail} />
         <Route exact={true} path='/recipes/:id' component={RecipeDetail} />
-        <Route exact={true} path='/change-pw' render={() => (
-          <ChangePwForm handleAuth={ this.props.handleAuth } />
-        )}/>
         <Route exact path='/sign-up' render={() => (
           this.props.loggedIn ? (
             <Redirect to='/cookbooks'/>
@@ -33,6 +31,18 @@ class Main extends React.Component {
           ) : (
             <SignInForm handleAuth={ this.props.handleAuth } updateAuthStatus={ this.props.updateAuthStatus }/>
           )
+        )}/>
+        <Route exact={true} path='/change-pw' render={() => (
+          <ChangePwForm handleAuth={ this.props.handleAuth } />
+        )}/>
+        <Route exact={true} path='/sign-out' render={() => (
+          <Redirect to='/welcome'/>
+        )}/>
+      <Route exact={true} path='/cookbooks/sign-out' render={() => (
+          <Redirect to='/welcome'/>
+        )}/>
+      <Route exact={true} path='/recipes/sign-out' render={() => (
+          <Redirect to='/welcome'/>
         )}/>
       </div>
     )
