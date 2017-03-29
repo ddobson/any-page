@@ -4,6 +4,8 @@ import React from 'react';
 import CookBookService from '../services/cookbook-api';
 import RecipeForm from './forms/RecipeForm';
 import RecipeSwatch from './RecipeSwatch';
+import Snackbar from 'material-ui/Snackbar';
+
 const cbService = new CookBookService();
 
 class CookbookDetail extends React.Component {
@@ -12,6 +14,7 @@ class CookbookDetail extends React.Component {
 
     this.state = {
       isLoading: true,
+      open: false,
       cookbook: {
         recipes: []
       }
@@ -28,7 +31,8 @@ class CookbookDetail extends React.Component {
       .then((response) => response.json())
       .then((json) => {
         this.setState({ cookbook: json.cookbook, isLoading: false })
-      });
+      })
+      .catch(() => this.setState({ open: true }));
   }
 
   handleNewRecipe(formData, form) {
@@ -40,11 +44,11 @@ class CookbookDetail extends React.Component {
           .then((json) => {
             this.setState({ cookbook: json.cookbook, isLoading: false })
           })
-          .catch(console.error);
+          .catch(() => this.setState({ open: true }));
 
         form.reset();
       })
-      .catch(console.error);
+      .catch(() => this.setState({ open: true }));
   }
 
   handleDestroyRecipe(id) {
@@ -56,9 +60,9 @@ class CookbookDetail extends React.Component {
           .then((json) => {
             this.setState({ cookbook: json.cookbook, isLoading: false })
           })
-          .catch(console.error);
+          .catch(() => this.setState({ open: true }));
       })
-      .catch(console.error);
+      .catch(() => this.setState({ open: true }));
   }
 
   render() {
@@ -81,6 +85,12 @@ class CookbookDetail extends React.Component {
         />
         { content }
         { swatches }
+        <Snackbar
+          open={this.state.open}
+          message={'Sorry something went wrong. Please try again.'}
+          autoHideDuration={4000}
+          onRequestClose={this.handleRequestClose}
+        />
       </div>
     )
   }
