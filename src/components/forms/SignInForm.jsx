@@ -2,8 +2,18 @@ import React from 'react';
 
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import Snackbar from 'material-ui/Snackbar';
 
 class SignInForm extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      error: false,
+      open: false
+    }
+  }
+
   submitSignIn(event) {
     event.preventDefault();
     const formData = {
@@ -23,6 +33,9 @@ class SignInForm extends React.Component {
         localStorage.setItem('token', json.user.token);
         this.refs.form.reset();
         this.props.updateAuthStatus(true)
+      })
+      .catch(() => {
+        this.setState({ error: true, open: true })
       });
   }
 
@@ -48,6 +61,12 @@ class SignInForm extends React.Component {
           />
         <RaisedButton type='submit' label='Submit' primary={true} />
       </form>
+      <Snackbar
+        open={this.state.open}
+        message={'Sorry something went wrong. Please try again.'}
+        autoHideDuration={4000}
+        onRequestClose={this.handleRequestClose}
+      />
     </div>
     )
   }
