@@ -4,6 +4,9 @@ import React from 'react';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import ValidationService from '../../services/ValidationService';
+
+const validations = new ValidationService();
 
 class NewCookbookForm extends React.Component {
   constructor(props) {
@@ -23,7 +26,9 @@ class NewCookbookForm extends React.Component {
       }
     }
 
-    this.props.handleNewCb(formData, form);
+    const validity = validations.validateCookbook(formData);
+
+    this.props.handleNewCb(formData, form, validity);
   }
 
   render() {
@@ -53,8 +58,8 @@ class NewCookbookForm extends React.Component {
             />
             <br />
             <TextField
-              hintText='Start Page'
-              floatingLabelText='Start Page'
+              hintText='End Page'
+              floatingLabelText='End Page'
               ref='newCbEnd'
               required={true}
               type='number'

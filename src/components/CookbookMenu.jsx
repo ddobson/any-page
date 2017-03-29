@@ -9,13 +9,17 @@ import Snackbar from 'material-ui/Snackbar';
 
 
 const cbService = new CookBookService();
+const validationErrorMsg = 'The start page of a cookbook must preceed it\'s end page. Try again.';
+const ajaxErrorMsg = 'Sorry something went wrong. Please try again.';
 
 class CookbookMenu extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       cookbooks: [],
       isLoading: true,
+      errorMsg: '',
       open: false
     }
 
@@ -24,7 +28,7 @@ class CookbookMenu extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ open: false });
+    this.setState({ open: false, errorMsg: '' });
 
     cbService.getCookbooks()
       .then((response) => response.json())
@@ -34,10 +38,19 @@ class CookbookMenu extends React.Component {
 
         this.setState({ cookbooks, isLoading: false });
       })
-      .catch(() => this.setState({ open: true }));
+      .catch(() => this.setState({ open: true, errorMsg: ajaxErrorMsg }));
   }
 
-  handleNewCb(formData, form) {
+  handleNewCb(formData, form, valid) {
+    if (!valid) {
+      this.setState({ open: true, errorMsg: validationErrorMsg })
+      return;
+    }
+
+    // SANATIZE STATE TO PREVENT SNACKBAR FROM OPENING
+    // ON SECOND TRY AFTER A VALIDATION ERROR
+    this.setState({ open: false, errorMsg: '' })
+
     cbService.createCookbook(formData)
       .then((response) => response.json())
       .then((json) => {
@@ -47,7 +60,7 @@ class CookbookMenu extends React.Component {
         this.setState({ cookbooks })
         form.reset();
       })
-      .catch(() => this.setState({ open: true }));
+      .catch(() => this.setState({ open: true, errorMsg: ajaxErrorMsg }));
   }
 
   handleDestroyCb(id) {
@@ -59,9 +72,9 @@ class CookbookMenu extends React.Component {
           .then((json) => {
             this.setState({ cookbooks: json.cookbooks, isLoading: false });
           })
-          .catch(() => this.setState({ open: true }));
+          .catch(() => this.setState({ open: true, errorMsg: ajaxErrorMsg }));
       })
-      .catch(() => this.setState({ open: true }));
+      .catch(() => this.setState({ open: true, errorMsg: ajaxErrorMsg }));
   }
 
   render() {
@@ -87,7 +100,7 @@ class CookbookMenu extends React.Component {
         </div>
         <Snackbar
           open={this.state.open}
-          message={'Sorry something went wrong. Please try again.'}
+          message={this.state.errorMsg}
           autoHideDuration={4000}
           onRequestClose={this.handleRequestClose}
         />
