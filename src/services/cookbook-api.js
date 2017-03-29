@@ -72,6 +72,16 @@ class CookBookService {
     });
   }
 
+  updateRecipe(id, data) {
+    const headers = this.postPatchHeaders();
+    data = JSON.stringify(data);
+    return fetch(`${this.baseUrl}/recipes/${id}`, {
+      method: 'PATCH',
+      headers: headers,
+      body: data,
+    });
+  }
+
   destroyRecipe(id) {
     const headers = this.getDeleteHeaders();
     return fetch(`${this.baseUrl}/recipes/${id}`, {
