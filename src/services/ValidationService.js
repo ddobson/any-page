@@ -36,26 +36,26 @@ class ValidationService {
     } else if (end > cookbook.end_page) {
       return [false, 'The recipe end page cannot exceed the cookbook end page.'];
     } else if (isNotValidRange) {
-      return [false, 'This recipe\'s pages fall between the range of another recipe. Try again.'];
+      return [false, 'Some or all of this recipe\'s pages belong to another recipe. Try again.'];
     }
 
     return [true, 'Valid Recipe'];
   }
 
-  // For editing form merge recipeRange back into availPages
   checkIsNotValidRangeNew(start, end, availPages) {
-    const recipeRange = range(start + 1, end);
-    const invalidRange = recipeRange.some((e) => availPages.indexOf(e) === -1);
-    const startNotAvail = availPages.indexOf(start) === -1;
-    const endNotAvail = availPages.indexOf(end) === -1;
+    const recipeRange = range(start, end + 1);
+    const entireRangeValid = recipeRange.every((e) => availPages.indexOf(e) !== -1);
 
-    if (startNotAvail && endNotAvail) {
-      return true;
-    } else if (invalidRange) {
-      return true;
+    // console.log("recipeRange:", recipeRange)
+    // console.log("recipeRange.length:", recipeRange.length)
+    // console.log("entireRangeValid:", entireRangeValid);
+
+    if (start === end && availPages.indexOf(start) > -1) {
+      return false;
+    } else if (entireRangeValid) {
+      return false;
     }
-
-    return false;
+    return true;
   }
 
   // Push original start & end back in. Not start and end from edit. Bad Logic here.
@@ -65,30 +65,21 @@ class ValidationService {
     const ogEnd = parseInt(ogPages.end_page, 10);
     // Mage a range from OG pages and push it into availPages
     let ogRange = [];
-
-    if (ogStart === ogEnd) {
-      ogRange.push(ogStart)
-    } else {
-      ogRange = range(ogStart, ogEnd + 1);
-    }
-
+    ogStart === ogEnd ? ogRange.push(ogStart) : ogRange = range(ogStart, ogEnd + 1);
     availPages = availPages.concat(ogRange).sort();
 
-    const recipeRange = range(start + 1, end);
-    const invalidRange = recipeRange.some((e) => availPages.indexOf(e) === -1);
-    const startNotAvail = availPages.indexOf(start) === -1;
-    const endNotAvail = availPages.indexOf(end) === -1;
+    const recipeRange = range(start, end + 1);
+    const entireRangeValid = recipeRange.every((e) => availPages.indexOf(e) !== -1);
 
-    // if start page === end page this conditional doesn't make sense.
-    if (start === end && availPages.indexOf(start) > 0) {
-      return false
-    } else if (startNotAvail && endNotAvail) {
-      return true;
-    } else if (invalidRange) {
-      return true;
+    // console.log("recipeRange:", recipeRange)
+    // console.log("availPages", availPages);
+    // console.log("recipeRange.length:", recipeRange.length)
+    // console.log("entireRangeValid:", entireRangeValid)
+
+    if (entireRangeValid) {
+      return false;
     }
-
-    return false;
+    return true;
   }
 }
 
