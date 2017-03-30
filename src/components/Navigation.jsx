@@ -52,6 +52,9 @@ class Navigation extends React.Component {
           anchorOrigin={{horizontal: 'right', vertical: 'top'}}
           targetOrigin={{horizontal: 'right', vertical: 'top'}}
         >
+          <Link to='/cookbooks' style={ { textDecoration: 'none' } }>
+            <MenuItem primaryText='Cookbooks' />
+          </Link>
           <Link to='/change-pw' style={ { textDecoration: 'none' } } >
             <MenuItem primaryText='Change Password' />
           </Link>
