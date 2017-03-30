@@ -1,39 +1,26 @@
 import React from 'react';
+import ValidationService from '../../services/ValidationService';
 
 // Components
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
+const validations = new ValidationService();
+
 class EditRecipeForm extends React.Component {
   constructor(props) {
     super(props)
 
     this.handleEditSubmit = this.handleEditSubmit.bind(this);
-    this.isValidForm = this.isValidForm.bind(this);
-  }
-
-  isValidForm(formData) {
-    const startPage = parseInt(formData.recipe.start_page, 10);
-    const endPage = parseInt(formData.recipe.end_page, 10);
-    const availPages = this.props.cookbook.avail_pages;
-
-    if (
-      endPage < startPage ||
-      startPage < availPages[0] ||
-      endPage > availPages[availPages.length - 1]
-    ) {
-      console.error('validation failed');
-      return false;
-    }
-
-    return true;
   }
 
   handleEditSubmit(event) {
     event.preventDefault();
     const form = this.refs.form;
+    const availPages = this.props.cookbook.avail_pages;
     const recipe = this.props.recipe;
+    const cookbook = this.props.cookbook;
     const formData = {
       recipe: {
         name: this.refs.editRecipeName.getValue() || recipe.name,
@@ -42,14 +29,9 @@ class EditRecipeForm extends React.Component {
         comments: this.refs.editComments.getValue() || recipe.comments
       }
     }
+    const valid = validations.validateRecipe(formData, availPages, 'edit', cookbook, recipe);
 
-    console.log(formData);
-
-    if (this.isValidForm(formData)) {
-      this.props.handleEditRecipe(formData, form);
-    } else {
-      return;
-    }
+    this.props.handleEditRecipe(formData, form, valid);
   }
 
   render() {

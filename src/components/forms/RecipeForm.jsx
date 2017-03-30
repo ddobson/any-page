@@ -18,6 +18,7 @@ class RecipeForm extends React.Component {
   handleNewSubmit(event) {
     event.preventDefault();
     const form = this.refs.form;
+    const cookbook = this.props.cookbook;
     const availPages = this.props.availPages;
     const formData = {
       recipe: {
@@ -26,7 +27,7 @@ class RecipeForm extends React.Component {
         end_page: this.refs.newRecipeEnd.getValue()
       }
     }
-    const valid = validations.validateRecipe(formData, availPages);
+    const valid = validations.validateRecipe(formData, availPages, 'new', cookbook);
 
     this.props.handleNewRecipe(formData, form, valid);
   }
@@ -84,7 +85,7 @@ class RecipeForm extends React.Component {
             </form>
           </div>
           <div className="column col-xs-12 col-md-6">
-            {<h2>Your Page: { randomPage || 'N/A' }</h2>}
+            {<h2>Your Page: { randomPage || 'None Left!' }</h2>}
           </div>
         </div>
       </Paper>

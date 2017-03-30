@@ -91,7 +91,7 @@ class CookbookDetail extends React.Component {
         <h1>{cookbook.title || ''}</h1>
         <RecipeForm
           handleNewRecipe={ this.handleNewRecipe }
-          cookbookId={ cookbook.id }
+          cookbook={ cookbook }
           availPages={ cookbook.avail_pages }
         />
         { content }

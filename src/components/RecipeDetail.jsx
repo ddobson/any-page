@@ -6,6 +6,7 @@ import EditRecipeForm from './forms/EditRecipeForm';
 import Snackbar from 'material-ui/Snackbar';
 
 const cbService = new CookBookService();
+const ajaxErrorMsg = 'Sorry something went wrong. Please try again.';
 
 class RecipeDetail extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class RecipeDetail extends React.Component {
     this.state = {
       isLoading: true,
       open: false,
+      errorMsg: '',
       recipe: {},
       cookbook: {}
     }
@@ -25,7 +27,7 @@ class RecipeDetail extends React.Component {
 
   componentDidMount() {
     this.setState({ open: false });
-    
+
     cbService.getRecipe(this.recipeId)
       .then((response) => response.json())
       .then((json) => {
@@ -37,19 +39,34 @@ class RecipeDetail extends React.Component {
           .then((json) => {
             this.setState({ cookbook: json.cookbook });
           })
-          .catch(() => this.setState({ open: true }))
+          .catch(() => this.setState({ open: true, errorMsg: ajaxErrorMsg }));
       })
-      .catch(() => this.setState({ open: true }));
+      .catch(() => this.setState({ open: true, errorMsg: ajaxErrorMsg }));
   }
 
-  handleEditRecipe(data, form) {
+  handleEditRecipe(data, form, valid) {
+    if (!valid[0]) {
+      this.setState({ open: true, errorMsg: valid[1]});
+      return;
+    }
+
+    this.setState({ open: false, errorMsg: '' })
+
     cbService.updateRecipe(this.recipeId, data)
       .then((response) => response.json())
       .then((json) => {
         this.setState({ recipe: json.recipe });
         form.reset();
       })
-      .catch(() => this.setState({ open: true }));
+      .then(() => {
+        cbService.getCookbook(this.state.recipe.cookbook_id)
+          .then((response) => response.json())
+          .then((json) => {
+            this.setState({ cookbook: json.cookbook });
+          })
+          .catch(() => this.setState({ open: true, errorMsg: ajaxErrorMsg }));
+      })
+      .catch(() => this.setState({ open: true, errorMsg: ajaxErrorMsg }));
   }
 
   render() {
@@ -58,8 +75,8 @@ class RecipeDetail extends React.Component {
         <EditRecipeForm handleEditRecipe={ this.handleEditRecipe } recipe={ this.state.recipe } cookbook={ this.state.cookbook } />
           <Snackbar
             open={this.state.open}
-            message={'Sorry something went wrong. Please try again.'}
-            autoHideDuration={4000}
+            message={this.state.errorMsg}
+            autoHideDuration={5000}
             onRequestClose={this.handleRequestClose}
           />
       </div>
