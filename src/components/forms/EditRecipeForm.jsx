@@ -40,7 +40,8 @@ class EditRecipeForm extends React.Component {
         <div className="form-wrap columns">
           <div className="column col-xs-12 col-md-6">
             <h2>Edit Your Recipe</h2>
-
+            <p>If you don't want to change a field from it's previous value, leave it blank.</p>
+            <p>Only fields you change will be updated.</p>
             <form ref='form' action='new-recipe' onSubmit={ this.handleEditSubmit }>
               <TextField
                 hintText='Name'
@@ -50,6 +51,18 @@ class EditRecipeForm extends React.Component {
                 type='text'
                 maxLength='250'
               />
+              <TextField
+                floatingLabelText='Comments'
+                fullWidth={true}
+                multiLine={true}
+                ref='editComments'
+                type='number'
+                min='1'
+                max='1000'
+                step='1'
+                rows={5}
+              />
+              <br />
               <br />
               <TextField
                 hintText='Start Page'
@@ -69,17 +82,6 @@ class EditRecipeForm extends React.Component {
                 min='1'
                 max='1000'
                 step='1'
-              />
-              <br />
-              <TextField
-                floatingLabelText='Comments'
-                multiLine={true}
-                ref='editComments'
-                type='number'
-                min='1'
-                max='1000'
-                step='1'
-                rows={5}
               />
               <br />
               <RaisedButton type='submit' label='Save It!' primary={true} />
