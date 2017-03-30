@@ -90,6 +90,7 @@ class CookbookDetail extends React.Component {
       <div>
         <h1>{cookbook.title || ''}</h1>
         <RecipeForm
+          isLoading={ this.state.isLoading }
           handleNewRecipe={ this.handleNewRecipe }
           cookbook={ cookbook }
           availPages={ cookbook.avail_pages }

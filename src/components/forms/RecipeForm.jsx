@@ -21,7 +21,7 @@ class RecipeForm extends React.Component {
    }
 
   componentWillReceiveProps(nextprops) {
-    if (nextprops.availPages) {
+    if (nextprops.availPages && (this.props.isLoading && !nextprops.isLoading)) {
       this.getRandomPage(nextprops.availPages);
     }
   }
