@@ -17,26 +17,25 @@ class Main extends React.Component {
       <div id='main'>
         <Switch>
           <Route exact={true} path='/' component={Welcome} />
-          <Route exact={true} path='/welcome' component={Welcome} />
           <Route exact={true} path='/cookbooks' render={props => (
             this.props.loggedIn ? (
               <CookbookMenu {...props} loggedIn={ this.props.loggedIn } />
             ) : (
-              <Redirect to='/welcome'/>
+              <Redirect to='/'/>
             )
           )}/>
           <Route exact={true} path='/cookbooks/:id' render={props => (
             this.props.loggedIn ? (
               <CookbookDetail {...props} loggedIn={ this.props.loggedIn } />
             ) : (
-              <Redirect to='/welcome'/>
+              <Redirect to='/'/>
             )
           )}/>
-        <Route exact={true} path='/cookbooks/:id/edit' render={props => (
+          <Route exact={true} path='/cookbooks/:id/edit' render={props => (
             this.props.loggedIn ? (
               <EditCookbook {...props} loggedIn={ this.props.loggedIn } />
             ) : (
-              <Redirect to='/welcome'/>
+              <Redirect to='/'/>
             )
           )}/>
           <Route exact={true} path='/recipes/:id' component={RecipeDetail} />
@@ -58,18 +57,18 @@ class Main extends React.Component {
             <ChangePwForm handleAuth={ this.props.handleAuth } />
           )}/>
           <Route exact={true} path='/sign-out' render={() => (
-            <Redirect to='/welcome'/>
+            <Redirect to='/'/>
           )}/>
           <Route exact={true} path='/cookbooks/sign-out' render={() => (
-            <Redirect to='/welcome'/>
+            <Redirect to='/'/>
           )}/>
           <Route exact={true} path='/recipes/sign-out' render={() => (
-            <Redirect to='/welcome'/>
+            <Redirect to='/'/>
           )}/>
           <Route exact={true} path='/cookbooks/:id/sign-out' render={() => (
-            <Redirect to='/welcome'/>
+            <Redirect to='/'/>
           )}/>
-        <Route component={NotFound} />
+          <Route component={NotFound} />
         </Switch>
       </div>
     )
