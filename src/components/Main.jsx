@@ -15,19 +15,31 @@ class Main extends React.Component {
       <div id='main'>
         <Route exact={true} path='/' component={Welcome} />
         <Route exact={true} path='/welcome' component={Welcome} />
-        <Route exact={true} path='/cookbooks' component={CookbookMenu} />
-        <Route exact={true} path='/cookbooks/:id' component={CookbookDetail} />
-        <Route exact={true} path='/recipes/:id' component={RecipeDetail} />
-        <Route exact path='/sign-up' render={() => (
+        <Route exact={true} path='/cookbooks' render={props => (
           this.props.loggedIn ? (
-            <Redirect to='/cookbooks'/>
+            <CookbookMenu {...props} loggedIn={ this.props.loggedIn } />
+          ) : (
+            <Redirect to='/welcome'/>
+          )
+        )}/>
+        <Route exact={true} path='/cookbooks/:id' render={props => (
+          this.props.loggedIn ? (
+            <CookbookDetail {...props} loggedIn={ this.props.loggedIn } />
+          ) : (
+            <Redirect to='/welcome'/>
+          )
+        )}/>
+        <Route exact={true} path='/recipes/:id' component={RecipeDetail} />
+        <Route exact path='/sign-up' render={props => (
+          this.props.loggedIn ? (
+            <Redirect {...props} to='/cookbooks'/>
           ) : (
             <SignUpForm handleAuth={ this.props.handleAuth } updateAuthStatus={ this.props.updateAuthStatus }/>
           )
         )}/>
-        <Route exact path='/sign-in' render={() => (
+        <Route exact path='/sign-in' render={props => (
           this.props.loggedIn ? (
-            <Redirect to='/cookbooks'/>
+            <Redirect {...props} to='/cookbooks'/>
           ) : (
             <SignInForm handleAuth={ this.props.handleAuth } updateAuthStatus={ this.props.updateAuthStatus }/>
           )
@@ -38,10 +50,10 @@ class Main extends React.Component {
         <Route exact={true} path='/sign-out' render={() => (
           <Redirect to='/welcome'/>
         )}/>
-      <Route exact={true} path='/cookbooks/sign-out' render={() => (
+        <Route exact={true} path='/cookbooks/sign-out' render={() => (
           <Redirect to='/welcome'/>
         )}/>
-      <Route exact={true} path='/recipes/sign-out' render={() => (
+        <Route exact={true} path='/recipes/sign-out' render={() => (
           <Redirect to='/welcome'/>
         )}/>
       </div>
