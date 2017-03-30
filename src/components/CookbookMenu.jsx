@@ -9,7 +9,7 @@ import Snackbar from 'material-ui/Snackbar';
 
 
 const cbService = new CookBookService();
-const validationErrorMsg = 'The start page of a cookbook must preceed it\'s end page. Try again.';
+const validationErrorMsg = 'The start page of a cookbook must preceed its end page. Try again.';
 const ajaxErrorMsg = 'Sorry something went wrong. Please try again.';
 
 class CookbookMenu extends React.Component {
