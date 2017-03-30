@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import AuthService from '../services/AuthService';
@@ -37,12 +37,12 @@ class App extends React.Component {
     const loggedIn = this.state.loggedIn;
 
     return (
-      <BrowserRouter>
+      <HashRouter>
         <div>
           <Navigation loggedIn={loggedIn} handleAuth={ this.handleAuth } updateAuthStatus={ this.updateAuthStatus } />
           <Main handleAuth={ this.handleAuth } updateAuthStatus={ this.updateAuthStatus } loggedIn={loggedIn} />
         </div>
-      </BrowserRouter>
+      </HashRouter>
     )
   }
 }
