@@ -36,6 +36,7 @@ class NewCookbookForm extends React.Component {
       <Paper zDepth={2}>
         <div className='form-wrap'>
           <h2>Create a Cookbook</h2>
+          <p>Add the title of your cookbook and the start and end pages recipes occur in.</p>
           <form ref='form' action='new-recipe' onSubmit={ this.handleNewSubmit }>
             <TextField
               hintText='Book Title'
