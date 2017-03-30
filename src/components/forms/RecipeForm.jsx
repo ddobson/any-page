@@ -12,7 +12,18 @@ class RecipeForm extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      randomPage: ' ',
+    }
+
     this.handleNewSubmit = this.handleNewSubmit.bind(this);
+    this.getRandomPage = this.getRandomPage.bind(this);
+   }
+
+  componentWillReceiveProps(nextprops) {
+    if (nextprops.availPages) {
+      this.getRandomPage(nextprops.availPages);
+    }
   }
 
   handleNewSubmit(event) {
@@ -32,22 +43,24 @@ class RecipeForm extends React.Component {
     this.props.handleNewRecipe(formData, form, valid);
   }
 
-  getRandomPage() {
-    if (!this.props.availPages) {
-      return;
-    } else {
-      const availPages = this.props.availPages;
-      return availPages[Math.floor(Math.random()*availPages.length)];
-    }
+  getRandomPage(availPages) {
+    const randomPage = availPages[Math.floor(Math.random()*availPages.length)];
+
+    this.setState({ randomPage });
   }
 
   render() {
-    const randomPage = this.getRandomPage();
     return (
       <Paper zDepth={2}>
         <div className="form-wrap columns">
+          <div className="column col-xs-12 col-md-6 center">
+            {<h2>Suggested Page</h2>}
+            <h1 className='suggestion'>{ this.state.randomPage || 'None Left!' }</h1>
+            <RaisedButton onTouchTap={() => this.getRandomPage(this.props.availPages)} label='Get Another Page' primary={true} />
+          </div>
           <div className="column col-xs-12 col-md-6">
-            <h2>Create a Recipe</h2>
+            <h2>Your Suggestions</h2>
+            <p>Like the recipe on this page? Save it and we'll remove it from future suggestions.</p>
             <form ref='form' action='new-recipe' onSubmit={ this.handleNewSubmit }>
               <TextField
                 hintText='Name'
@@ -83,9 +96,6 @@ class RecipeForm extends React.Component {
             <br />
             <RaisedButton type='submit' label='Save It!' primary={true} />
             </form>
-          </div>
-          <div className="column col-xs-12 col-md-6">
-            {<h2>Your Page: { randomPage || 'None Left!' }</h2>}
           </div>
         </div>
       </Paper>
