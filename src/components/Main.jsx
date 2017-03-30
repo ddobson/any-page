@@ -4,6 +4,7 @@ import { Route, Redirect } from 'react-router-dom';
 import Welcome from './Welcome';
 import CookbookMenu from './CookbookMenu';
 import CookbookDetail from './CookbookDetail';
+import EditCookbook from './EditCookbook';
 import SignUpForm from './forms/SignUpForm';
 import SignInForm from './forms/SignInForm';
 import ChangePwForm from './forms/ChangePwForm';
@@ -25,6 +26,13 @@ class Main extends React.Component {
         <Route exact={true} path='/cookbooks/:id' render={props => (
           this.props.loggedIn ? (
             <CookbookDetail {...props} loggedIn={ this.props.loggedIn } />
+          ) : (
+            <Redirect to='/welcome'/>
+          )
+        )}/>
+      <Route exact={true} path='/cookbooks/:id/edit' render={props => (
+          this.props.loggedIn ? (
+            <EditCookbook {...props} loggedIn={ this.props.loggedIn } />
           ) : (
             <Redirect to='/welcome'/>
           )

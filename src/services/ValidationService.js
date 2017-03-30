@@ -1,4 +1,6 @@
 import range from 'lodash/range';
+import max from 'lodash/max';
+import min from 'lodash/min';
 
 class ValidationService {
   validateCookbook(data) {
@@ -11,6 +13,35 @@ class ValidationService {
     }
 
     return true;
+  }
+
+  validateEditCookbook(data, cookbook) {
+    // Start page must be less than end page
+    const start = parseInt(data.cookbook.start_page, 10);
+    const end = parseInt(data.cookbook.end_page, 10);
+    const recipes = cookbook.recipes;
+    const recipePages = this.getRecipePages(recipes);
+    const maxPage = max(recipePages);
+    const minPage = min(recipePages)
+
+    if (start > end) {
+      return [false, 'Start page cannot preceed end page.'];
+    } else if (start > minPage) {
+      return [false, 'Your new start page preceeds an existing recipe.'];
+    } else if (end < maxPage) {
+      return [false, 'Your new end page is less an existing recipe.'];
+    }
+
+    return [true, 'Valid cookbook.'];
+  }
+
+  getRecipePages(recipes) {
+    const pages = [];
+    for (let i = 0; i < recipes.length; i++) {
+      pages.push(recipes[i].start_page);
+      pages.push(recipes[i].end_page);
+    }
+    return pages;
   }
 
   validateRecipe(data, availPages, action, cookbook, ogPages) {
