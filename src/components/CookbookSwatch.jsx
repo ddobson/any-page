@@ -13,10 +13,14 @@ class CookbookSwatch extends React.Component {
   render() {
     const content = (
       <div className='swatch-wrap'>
-        <i className='fa fa-book fa-5x' aria-hidden='true'></i>
+        <div>
+          <h3>{this.props.cookbook.title}</h3>
+          <i className='fa fa-book fa-5x' aria-hidden='true'></i>
+        </div>
         <Link to={`/cookbooks/${this.props.cookbook.id}`}>
-          <RaisedButton label={ this.props.cookbook.title } secondary={ true } />
+          <RaisedButton label='Recipes' secondary={ true } />
         </Link>
+        <br />
         <Link to={`/cookbooks/${this.props.cookbook.id}/edit`}>
           <RaisedButton label="Edit" secondary={ true } />
         </Link>

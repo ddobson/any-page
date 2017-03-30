@@ -13,16 +13,20 @@ class RecipeSwatch extends React.Component {
   render() {
     const content = (
       <div className='swatch-wrap'>
-        <i className='fa fa-book fa-5x' aria-hidden='true'></i>
+        <h3>{this.props.recipe.name}</h3>
+        <div>
+          <i className='fa fa-cutlery fa-5x' aria-hidden='true'></i>
+        </div>
         <Link to={ `/recipes/${this.props.recipe.id}` }>
-          <RaisedButton label={ this.props.recipe.name } secondary={ true } />
+          <RaisedButton label='Comment or Edit' secondary={ true } />
         </Link>
-        <RaisedButton label='Delete' onTouchTap={ this.destroyClick.bind(this) } secondary={ true } />
+        <br />
+        <RaisedButton style={{ marginTop: '7px' }} label='Delete' onTouchTap={ this.destroyClick.bind(this) } secondary={ true } />
       </div>
     );
 
     return (
-      <Paper className='column col-12' style={ { marginBottom: '15px' } } children={ content } />
+      <Paper className='column col-6' style={ { marginBottom: '15px' } } children={ content } />
     )
   }
 }
