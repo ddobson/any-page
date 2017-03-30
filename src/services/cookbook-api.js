@@ -46,6 +46,16 @@ class CookBookService {
     });
   }
 
+  updateCookbook(id, data) {
+    const headers = this.postPatchHeaders();
+    data = JSON.stringify(data);
+    return fetch(`${this.baseUrl}/cookbooks/${id}`, {
+      method: 'PATCH',
+      headers: headers,
+      body: data,
+    });
+  }
+
   destroyCookbook(id) {
     const headers = this.getDeleteHeaders();
     return fetch(`${this.baseUrl}/cookbooks/${id}`, {
