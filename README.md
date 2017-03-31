@@ -30,7 +30,7 @@ $ npm run build
 
 CookbookNook is an app that allows users get random recipe suggestions from their real-world cookbook collection. Users enter their cookbooks and the pages that recipes appear in the book. They can then get random suggestions from that book. If they like the recipe they find on the suggested page, they can save it along with it's page numbers or roll for another random page. Once a recipe is saved the user can go back and leave comments on it after they have tried cooking it. If the user saves the recipe, it won't be shown to them again.
 
-The target audience for this app is people who like to cook and have a large cookbook collection. The app is meant to be a fun way to push you out of your comfort zone and try new things.
+The target audience for this app is people who like to cook and have a large cookbook collection. The app is meant to be a fun way to push you out of your comfort zone and try new things. To add to the project in the future I'd like to add a ratings system and allow user's to sort through all of their favorite recipes.
 
 The app's foundation is built on React. Many stylized components come from the Material UI component library. Routing is handled by the latest version of React Router (4.0.0 at the time of writing). The app utilizes a Rails API for data persistance and calculating the available pages left for a given book.
 
