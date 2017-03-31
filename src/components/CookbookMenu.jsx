@@ -84,7 +84,7 @@ class CookbookMenu extends React.Component {
     let swatches = null;
 
     if (isLoading) {
-      content = <CircularProgress size={100} thickness={7} style={{marginLeft: '50%', marginTop: '60px', left: '-50px'}} />;
+      content = <CircularProgress size={100} thickness={7} style={{ marginLeft: '50%', marginTop: '60px', left: '-50px' }} />;
     } else {
       content = <NewCookbookForm handleNewCb={ this.handleNewCb } />;
       swatches = cookbooks.map((cookbook, i) => <CookbookSwatch key={i} cookbook={cookbook} handleDestroyCb={this.handleDestroyCb} />);

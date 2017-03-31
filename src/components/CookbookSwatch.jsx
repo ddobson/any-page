@@ -22,9 +22,10 @@ class CookbookSwatch extends React.Component {
         </Link>
         <br />
         <Link to={`/cookbooks/${this.props.cookbook.id}/edit`}>
-          <RaisedButton label="Edit" secondary={ true } />
+          <RaisedButton style={{ marginTop: '7px' }} label="Edit" secondary={ true } />
         </Link>
-        <RaisedButton label='Delete' onTouchTap={ this.destroyClick.bind(this) } secondary={ true } />
+        <br />
+        <RaisedButton style={{ marginTop: '7px' }} label='Delete' onTouchTap={ this.destroyClick.bind(this) } secondary={ true } />
       </div>
     );
 

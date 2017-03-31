@@ -13,7 +13,7 @@ class RecipeSwatch extends React.Component {
   render() {
     const content = (
       <div className='swatch-wrap'>
-        <h3>{this.props.recipe.name}</h3>
+        <h3>{ this.props.recipe.name }</h3>
         <div>
           <i className='fa fa-cutlery fa-5x' aria-hidden='true'></i>
         </div>
@@ -26,7 +26,7 @@ class RecipeSwatch extends React.Component {
     );
 
     return (
-      <Paper className='column col-6' style={ { marginBottom: '15px' } } children={ content } />
+      <Paper className='column col-12' style={ { marginBottom: '15px' } } children={ content } />
     )
   }
 }
