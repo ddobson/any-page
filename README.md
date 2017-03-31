@@ -2,6 +2,9 @@
 
 ![cbnook](https://github.com/ddobson/cookbook-nook/blob/master/cbnook.png)
 
+[Deployed App](http://cookbook-nook.surge.sh/)
+[API Repo](https://github.com/ddobson/cookbook-nook-api)
+
 ## Technolgy
 - [ReactJS](https://github.com/facebook/react)
 - [React Router v4](https://reacttraining.com/react-router/web/guides/quick-start)
