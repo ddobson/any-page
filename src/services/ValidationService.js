@@ -77,10 +77,6 @@ class ValidationService {
     const recipeRange = range(start, end + 1);
     const entireRangeValid = recipeRange.every((e) => availPages.indexOf(e) !== -1);
 
-    // console.log("recipeRange:", recipeRange)
-    // console.log("recipeRange.length:", recipeRange.length)
-    // console.log("entireRangeValid:", entireRangeValid);
-
     if (start === end && availPages.indexOf(start) > -1) {
       return false;
     } else if (entireRangeValid) {
@@ -101,11 +97,6 @@ class ValidationService {
 
     const recipeRange = range(start, end + 1);
     const entireRangeValid = recipeRange.every((e) => availPages.indexOf(e) !== -1);
-
-    // console.log("recipeRange:", recipeRange)
-    // console.log("availPages", availPages);
-    // console.log("recipeRange.length:", recipeRange.length)
-    // console.log("entireRangeValid:", entireRangeValid)
 
     if (entireRangeValid) {
       return false;

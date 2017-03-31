@@ -19,8 +19,7 @@ class Navigation extends React.Component {
       .then(() => {
         localStorage.clear();
         this.props.updateAuthStatus(false);
-      })
-      .catch(console.error);
+      });
   }
 
   render() {

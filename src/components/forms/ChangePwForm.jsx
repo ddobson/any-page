@@ -31,7 +31,7 @@ class ChangePwForm extends React.Component {
         }
         this.refs.form.reset();
       })
-      .catch(console.error);
+      .catch(() => this.setState({ open: true }));
   }
 
   render() {
