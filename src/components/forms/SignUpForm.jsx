@@ -4,6 +4,9 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import Snackbar from 'material-ui/Snackbar';
 
+const successMsg = 'Woohoo! Please sign in.';
+const ajaxMsg = 'Sorry there was an issue. Please try again.';
+
 class SignUpForm extends React.Component {
   constructor(props) {
     super(props);
@@ -25,25 +28,14 @@ class SignUpForm extends React.Component {
     }
 
     this.props.handleAuth('sign-up', formData)
-      .then(() => {
-        this.props.handleAuth('sign-in', formData)
-          .then((response) => {
-            return response.json();
-          })
-          .then((json) => {
-            localStorage.setItem('id', json.user.id);
-            localStorage.setItem('email', json.user.email);
-            localStorage.setItem('token', json.user.token);
-            this.refs.form.reset();
-            this.props.updateAuthStatus(true)
-          })
-          .catch(() => {
-            this.setState({ error: true, open: true })
-          });
+      .then((response) => {
+        if (response.status !== 201) {
+          this.setState({ error: true, open: true })
+        } else {
+          this.setState({ open: true, error: false })
+        }
       })
-      .catch(() => {
-        this.setState({ error: true, open: true })
-      });
+      .then(() => this.refs.form.reset())
   }
 
   render() {
@@ -76,7 +68,7 @@ class SignUpForm extends React.Component {
           />
           <Snackbar
             open={this.state.open}
-            message={'Sorry something went wrong. Please try again.'}
+            message={ this.state.error ? ajaxMsg : successMsg }
             autoHideDuration={4000}
             onRequestClose={this.handleRequestClose}
           />

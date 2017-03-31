@@ -39,12 +39,8 @@ class Main extends React.Component {
             )
           )}/>
           <Route exact={true} path='/recipes/:id' component={RecipeDetail} />
-          <Route exact path='/sign-up' render={props => (
-            this.props.loggedIn ? (
-              <Redirect {...props} to='/cookbooks'/>
-            ) : (
-              <SignUpForm handleAuth={ this.props.handleAuth } updateAuthStatus={ this.props.updateAuthStatus }/>
-            )
+          <Route exact={true} path='/sign-up' render={() => (
+              <SignUpForm handleAuth={ this.props.handleAuth } />
           )}/>
           <Route exact path='/sign-in' render={props => (
             this.props.loggedIn ? (
